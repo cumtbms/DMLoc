@@ -126,13 +126,13 @@ def valid_normalization(micdata,batchnum, inputsize,batchoverlap,reslen=0,tracen
     if  reslen!= 0:
         valid = np.zeros((int(micdata.shape[0] / 3 * (batchnum + 1)), inputsize, 3))
         for i in range(batchnum):
-            valid[i * int(tracenum):i * int(tracenum) + int(tracenum), :, 0] = micdata[0:207:3,
+            valid[i * int(tracenum):i * int(tracenum) + int(tracenum), :, 0] = micdata[0:tracenum*3:3,
                                                 (inputsize - batchoverlap) * i:(
                                                                                         inputsize - batchoverlap) * i + inputsize] * 1
-            valid[i * int(tracenum):i * int(tracenum) + int(tracenum), :, 1] = micdata[1:207:3,
+            valid[i * int(tracenum):i * int(tracenum) + int(tracenum), :, 1] = micdata[1:tracenum*3:3,
                                                 (inputsize - batchoverlap) * i:(
                                                                                         inputsize - batchoverlap) * i + inputsize] * 1
-            valid[i * int(tracenum):i * int(tracenum) + int(tracenum), :, 2] = micdata[2:207:3,
+            valid[i * int(tracenum):i * int(tracenum) + int(tracenum), :, 2] = micdata[2:tracenum*3:3,
                                                 (inputsize - batchoverlap) * i:(
                                                                                         inputsize - batchoverlap) * i + inputsize] * 1
             for k in range(int(micdata.shape[0] / 3)):
@@ -140,9 +140,9 @@ def valid_normalization(micdata,batchnum, inputsize,batchoverlap,reslen=0,tracen
                 data_train = (data_train - np.mean(data_train))
                 data_train = data_train / np.std(data_train)
                 valid[i * int(tracenum) + k, :, :] = data_train
-        valid[- int(tracenum):, :, 0] = micdata[0:207:3, -inputsize:] * 1
-        valid[- int(tracenum):, :, 1] = micdata[1:207:3, -inputsize:] * 1
-        valid[- int(tracenum):, :, 2] = micdata[2:207:3, -inputsize:] * 1
+        valid[- int(tracenum):, :, 0] = micdata[0:tracenum*3:3, -inputsize:] * 1
+        valid[- int(tracenum):, :, 1] = micdata[1:tracenum*3:3, -inputsize:] * 1
+        valid[- int(tracenum):, :, 2] = micdata[2:tracenum*3:3, -inputsize:] * 1
         for k in range(int(micdata.shape[0] / 3)):
             data_train = valid[batchnum * int(tracenum) + k, :, :] * 1
             data_train = (data_train - np.mean(data_train))
@@ -151,13 +151,13 @@ def valid_normalization(micdata,batchnum, inputsize,batchoverlap,reslen=0,tracen
     else:
         valid = np.zeros((int(micdata.shape[0] / 3) * (batchnum), micdata.shape[1], 3))
         for i in range(batchnum):
-            valid[i * int(tracenum):i * int(tracenum) + int(tracenum), :, 0] = micdata[0:207:3,
+            valid[i * int(tracenum):i * int(tracenum) + int(tracenum), :, 0] = micdata[0:tracenum*3:3,
                                                 (inputsize - batchoverlap) * i:(
                                                                                         inputsize - batchoverlap) * i + inputsize] * 1
-            valid[i * int(tracenum):i * int(tracenum) + int(tracenum), :, 1] = micdata[1:207:3,
+            valid[i * int(tracenum):i * int(tracenum) + int(tracenum), :, 1] = micdata[1:tracenum*3:3,
                                                 (inputsize - batchoverlap) * i:(
                                                                                         inputsize - batchoverlap) * i + inputsize] * 1
-            valid[i * int(tracenum):i * int(tracenum) + int(tracenum), :, 2] = micdata[2:207:3,
+            valid[i * int(tracenum):i * int(tracenum) + int(tracenum), :, 2] = micdata[2:tracenum*3:3,
                                                 (inputsize - batchoverlap) * i:(
                                                                                         inputsize - batchoverlap) * i + inputsize] * 1
             for k in range(int(micdata.shape[0] / 3)):
