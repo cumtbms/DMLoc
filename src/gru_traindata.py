@@ -9,9 +9,9 @@ if __name__ == "__main__":
     import scipy.io as sio
     import random
     sample=100
-    deltX = 200
-    deltY = 200
-    deltZ = 200
+    deltX = 100
+    deltY = 100
+    deltZ = 100
     Start_pos = [0,0,-4000]
     End_pos = [30000,36000,-1000]
     aStart_pos = np.asarray(Start_pos)
